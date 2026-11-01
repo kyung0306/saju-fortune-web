@@ -1,0 +1,17 @@
+{
+  "name": "saju-fortune-web",
+  "version": "1.0.0",
+  "description": "사주 운세 풀이 웹사이트 (saju-fortune 기반)",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/app.js --bundle --outfile=dist/bundle.js --format=iife --minify",
+    "dev": "esbuild src/app.js --bundle --outfile=dist/bundle.js --format=iife --sourcemap --watch"
+  },
+  "dependencies": {
+    "saju-fortune": "^0.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사주 운세 · 무료 사주팔자 풀이</title>
+  <meta name="description" content="생년월일시로 사주팔자, 오행 분포, 연애운·재물운·직업운·건강운, 궁합을 무료로 풀이해 드립니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-mark">☯</span>
+        <span class="logo-text">사주운세</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="saju">내 사주 보기</button>
+        <button class="nav-link" data-view="compat">궁합 보기</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <p class="hero-eyebrow">전통 사주 명리학 기반 무료 풀이</p>
+      <h1 class="hero-title">당신의 사주팔자를<br />알기 쉽게 풀어드립니다</h1>
+      <p class="hero-sub">생년월일시만 입력하면 사주팔자, 오행 분포,<br />운세 흐름을 바로 확인할 수 있어요.</p>
+    </section>
+
+    <!-- SAJU VIEW -->
+    <section id="view-saju" class="view active">
+      <div class="card form-card">
+        <h2 class="card-title">기본 정보 입력</h2>
+        <p class="card-desc">정확한 풀이를 위해 아래 정보를 입력해 주세요.</p>
+
+        <form id="saju-form" class="form" novalidate>
+          <div class="form-grid">
+            <label class="field">
+              <span class="field-label">이름 <em>(선택)</em></span>
+              <input type="text" id="saju-name" placeholder="홍길동" autocomplete="off" />
+            </label>
+
+            <div class="field">
+              <span class="field-label">성별</span>
+              <div class="segmented" role="radiogroup">
+                <label class="seg-option">
+                  <input type="radio" name="saju-gender" value="male" checked />
+                  <span>남성</span>
+                </label>
+                <label class="seg-option">
+                  <input type="radio" name="saju-gender" value="female" />
+                  <span>여성</span>
+                </label>
+              </div>
+            </div>
+
+            <label class="field">
+              <span class="field-label">생년월일 <b>(양력)</b></span>
+              <input type="date" id="saju-birthdate" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">태어난 시간 <em>(선택)</em></span>
+              <input type="time" id="saju-birthtime" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">출생지 <em>(선택)</em></span>
+              <input type="text" id="saju-birthcity" placeholder="예: 서울" autocomplete="off" />
+            </label>
+
+            <div class="field">
+              <span class="field-label">보고 싶은 주제</span>
+              <select id="saju-topic">
+                <option value="general">종합운</option>
+                <option value="love">연애운</option>
+                <option value="wealth">재물운</option>
+                <option value="career">직업운</option>
+                <option value="health">건강운</option>
+                <option value="year">한해 운세</option>
+              </select>
+            </div>
+
+            <label class="field" id="saju-year-wrap" hidden>
+              <span class="field-label">보고 싶은 해</span>
+              <input type="number" id="saju-year" min="1900" max="2100" />
+            </label>
+          </div>
+
+          <p class="form-note">※ 음력 생일은 현재 양력 기준으로만 풀이합니다. 태어난 시간을 모르면 연·월·일 중심으로 보수적으로 해석해요.</p>
+
+          <button type="submit" class="btn-primary" id="saju-submit">
+            <span>내 사주 풀이 받기</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Results -->
+      <div id="saju-result" class="result" hidden></div>
+    </section>
+
+    <!-- COMPAT VIEW -->
+    <section id="view-compat" class="view">
+      <div class="card form-card">
+        <h2 class="card-title">두 사람의 궁합 확인</h2>
+        <p class="card-desc">두 사람의 사주를 비교해 궁합 점수와 조율 포인트를 알려드립니다.</p>
+
+        <form id="compat-form" class="form" novalidate>
+          <div class="compat-columns">
+            <fieldset class="person-box">
+              <legend>첫 번째 사람</legend>
+              <label class="field">
+                <span class="field-label">이름 <em>(선택)</em></span>
+                <input type="text" id="p1-name" placeholder="이름" autocomplete="off" />
+              </label>
+              <div class="field">
+                <span class="field-label">성별</span>
+                <div class="segmented" role="radiogroup">
+                  <label class="seg-option"><input type="radio" name="p1-gender" value="male" checked /><span>남성</span></label>
+                  <label class="seg-option"><input type="radio" name="p1-gender" value="female" /><span>여성</span></label>
+                </div>
+              </div>
+              <label class="field">
+                <span class="field-label">생년월일 <b>(양력)</b></span>
+                <input type="date" id="p1-birthdate" required />
+              </label>
+              <label class="field">
+                <span class="field-label">태어난 시간 <em>(선택)</em></span>
+                <input type="time" id="p1-birthtime" />
+              </label>
+            </fieldset>
+
+            <fieldset class="person-box">
+              <legend>두 번째 사람</legend>
+              <label class="field">
+                <span class="field-label">이름 <em>(선택)</em></span>
+                <input type="text" id="p2-name" placeholder="이름" autocomplete="off" />
+              </label>
+              <div class="field">
+                <span class="field-label">성별</span>
+                <div class="segmented" role="radiogroup">
+                  <label class="seg-option"><input type="radio" name="p2-gender" value="male" /><span>남성</span></label>
+                  <label class="seg-option"><input type="radio" name="p2-gender" value="female" checked /><span>여성</span></label>
+                </div>
+              </div>
+              <label class="field">
+                <span class="field-label">생년월일 <b>(양력)</b></span>
+                <input type="date" id="p2-birthdate" required />
+              </label>
+              <label class="field">
+                <span class="field-label">태어난 시간 <em>(선택)</em></span>
+                <input type="time" id="p2-birthtime" />
+              </label>
+            </fieldset>
+          </div>
+
+          <button type="submit" class="btn-primary" id="compat-submit">
+            <span>궁합 확인하기</span>
+          </button>
+        </form>
+      </div>
+
+      <div id="compat-result" class="result" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>사주 풀이는 전통 해석에 기반한 참고 자료이며, 의료·투자·법률·안전 결정을 대신하지 않습니다.</p>
+      <p class="footer-meta">Powered by <a href="https://github.com/NomaDamas/k-skill" target="_blank" rel="noopener">k-skill / saju-fortune</a> · MIT License</p>
+    </div>
+  </footer>
+
+  <script src="dist/bundle.js" defer></script>
+</body>
+</html>
